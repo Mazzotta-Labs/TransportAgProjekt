@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import "mvc-booklibrary/cli"
 
-func main()  {
-	fmt.Println("test")
+func main() {
+
+	cli.ClearTerminal()
+	cli.PrintMenue()
+	for true {
+		cli.ExecuteCommand()
+	}
+
+
 }
