@@ -2,15 +2,13 @@ package mysql
 
 import (
 	"database/sql"
-	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	"mvc-booklibrary/book/entity"
 )
 
 var db *sql.DB
 
+/*
 type MySqlRepository struct {
-	books []entity.Book
+	books []entity.entity
 }
 
 func NewMySqlRepository() * MySqlRepository{
@@ -67,13 +65,12 @@ func (r *MySqlRepository) UpdateBook(book entity.Book) {
 		panic(err.Error())
 	}
 }
-
+*/
 
 func openDatabase() *sql.DB {
 	db, err := sql.Open("mysql", "root:Gamer-zone22@tcp(localhost:3306)/mybooks")
-	if err != nil{
+	if err != nil {
 		panic(err.Error())
 	}
 	return db
 }
-

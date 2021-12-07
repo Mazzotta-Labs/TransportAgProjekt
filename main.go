@@ -1,6 +1,6 @@
 package main
 
-import "mvc-booklibrary/cli"
+import "TransportAgProjekt1/cli"
 
 func main() {
 
@@ -9,6 +9,5 @@ func main() {
 	for true {
 		cli.ExecuteCommand()
 	}
-
 
 }

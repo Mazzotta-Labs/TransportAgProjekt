@@ -1,7 +1,6 @@
 package inmemory
 
-import "mvc-booklibrary/book/entity"
-
+/*
 type BookInMemoryRepository struct {
 	books []entity.Book
 }
@@ -21,3 +20,5 @@ func (r *BookInMemoryRepository) UpdateBook(book entity.Book)  {
 		}
 	}
 }
+
+*/
