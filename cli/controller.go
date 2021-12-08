@@ -2,6 +2,7 @@ package cli
 
 import (
 	"TransportAgProjekt1/model"
+	"TransportAgProjekt1/model/entity"
 	"bufio"
 	"fmt"
 	"log"
@@ -39,10 +40,12 @@ func parseCommand(input string) {
 		PrintMenue()
 		break
 	case input == "2":
-		ClearTerminal()
-		PrintDriverMenu()
 	out2:
 		for true {
+			ClearTerminal()
+			PrintDriverMenu()
+			drivers := model.FindAllDriver()
+			printDriverList(drivers)
 			command := askForCommand()
 			switch {
 			case command == "1":
@@ -136,6 +139,12 @@ func createBook(response string) *entity.Book {
 }
 
 */
+
+func printDriverList(driversToPrint []entity.Driver) {
+	for i, driver := range driversToPrint {
+		fmt.Println(i+1, "| Fahrer ID:", driver.DriverId+",", "Name:", driver.Name+",", "Vorname:", driver.Prename+",", "Fahreug ID:", driver.VehicleId+",", "Fahrzeug Marke:", driver.Brand+",", "Fahrzeugnummer:", driver.Number)
+	}
+}
 
 func askForCommand() string {
 	reader := bufio.NewReader(os.Stdin)

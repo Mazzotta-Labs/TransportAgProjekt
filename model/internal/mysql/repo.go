@@ -4,6 +4,7 @@ import (
 	"TransportAgProjekt1/model/entity"
 	"database/sql"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var db *sql.DB
@@ -21,7 +22,7 @@ func NewMySqlRepository() *MySqlRepository {
 
 func (r *MySqlRepository) FindAllDriver() []entity.Driver {
 	var drivers []entity.Driver
-	result, err := db.Query("select * from Driver")
+	result, err := db.Query("select * from Driver join Vehicle using (id)")
 	fmt.Println(result)
 	if err != nil {
 		panic(err.Error())
@@ -30,7 +31,7 @@ func (r *MySqlRepository) FindAllDriver() []entity.Driver {
 	for result.Next() {
 		var driver entity.Driver
 
-		err := result.Scan(&driver.in, &book.Title, &book.Author, &book.PublishedYear, &book.Borrowed)
+		err := result.Scan(&driver.DriverId, &driver.Name, &driver.Prename, &driver.VehicleId, &driver.Brand, &driver.Number)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -40,17 +41,18 @@ func (r *MySqlRepository) FindAllDriver() []entity.Driver {
 }
 
 func (r *MySqlRepository) AddDriver(driver entity.Driver) {
-	isbn := book.ISBN
-	title := book.Title
-	author := book.Author
-	year := book.PublishedYear
-	borrowed := book.Borrowed
+	driverId := driver.DriverId
+	name := driver.Name
+	prename := driver.Prename
+	vehicleId := driver.VehicleId
+	brand := driver.Brand
+	number := driver.Number
 
-	stmt, err := db.Prepare("insert into model values (?,?,?,?,?)")
+	stmt, err := db.Prepare("insert into model values (?,?,?,?,?,?)")
 	if err != nil {
 		panic(err.Error())
 	}
-	_, err = stmt.Exec(isbn, title, author, year, borrowed)
+	_, err = stmt.Exec(driverId, name, prename, vehicleId, brand, number)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -126,7 +128,7 @@ func (r *MySqlRepository) UpdateBook(book entity.Book) {
 */
 
 func openDatabase() *sql.DB {
-	db, err := sql.Open("mysql", "root:12345@tcp(localhost:3306)/mybooks")
+	db, err := sql.Open("mysql", "root:Passwort@tcp(localhost:3306)/transportag")
 	if err != nil {
 		panic(err.Error())
 	}

@@ -1,8 +1,26 @@
 package model
 
 import (
+	"TransportAgProjekt1/model/entity"
+	"TransportAgProjekt1/model/internal"
 	"os"
 )
+
+func FindAllDriver() []entity.Driver {
+	return internal.R.FindAllDriver()
+}
+
+func AddDriver(driver entity.Driver) {
+	internal.R.AddDriver(driver)
+}
+
+func UpdateDriver(driver entity.Driver) {
+	internal.R.UpdateDriver(driver)
+}
+
+func DeleteDriver(driver entity.Driver) {
+	internal.R.DeleteDriver(driver)
+}
 
 /*
 func AddBook(book entity.Book) {

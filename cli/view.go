@@ -36,11 +36,13 @@ func PrintDriverMenu() {
 ########################################
 #************* Mitarbeiter *************
 #********* Wähle eine Option ***********
-# 1. Auftrag erstellen
-# 2. Auftrag bearbeiten
-# 3. Auftrag löschen
+# 1. Mitarbeiter erstellen
+# 2. Mitarbeiter bearbeiten
+# 3. Mitarbeiter löschen
 #
 # q. Zurück
+#
+##************* Mitarbeiter *************
 `)
 }
 
