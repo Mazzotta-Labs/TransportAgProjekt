@@ -1,8 +1,8 @@
 package model
 
 import (
-	"TransportAgProjekt1/model/entity"
-	"TransportAgProjekt1/model/internal"
+	"TransportAgProjekt/model/entity"
+	"TransportAgProjekt/model/internal"
 	"os"
 )
 
@@ -20,6 +20,22 @@ func UpdateDriver(driver entity.Driver) {
 
 func DeleteDriver(driver entity.Driver) {
 	internal.R.DeleteDriver(driver)
+}
+
+func FindAllCustomer() []entity.Customer {
+	return internal.R.FindAllCustomer()
+}
+
+func AddCustomer(customer entity.Customer) {
+	internal.R.AddCustomer(customer)
+}
+
+func UpdateCustomer(customer entity.Customer) {
+	internal.R.UpdateCustomer(customer)
+}
+
+func DeleteCustomer(customer string) {
+	internal.R.DeleteCustomer(customer)
 }
 
 /*

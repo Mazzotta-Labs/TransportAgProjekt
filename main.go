@@ -1,6 +1,6 @@
 package main
 
-import "TransportAgProjekt1/cli"
+import "TransportAgProjekt/cli"
 
 func main() {
 

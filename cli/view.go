@@ -56,6 +56,33 @@ func PrintCustomerMenu() {
 # 3. Kunden löschen
 #
 # q. Zurück
+
+
+#************* Mitarbeiter *************
+`)
+}
+
+func PrintAddCustomer() {
+	fmt.Println(`
+#********* Kunde erstellen ***********
+# gib folgendes ein:
+# "ID", "Name", "Vorname", "Telefon Nr.", "Strasse", "PLZ", "Ort", "Land" 
+`)
+}
+
+func PrintUpdateCustomer() {
+	fmt.Println(`
+#********* Kunde bearbeiten ***********
+# gib folgendes ein wobei "ID" von
+# einem bestehenden Kunden sein muss:
+# "ID", "Name", "Vorname", "Telefon Nr.", "Strasse", "PLZ", "Ort", "Land" 
+`)
+}
+
+func PrintDeleteCustomer() {
+	fmt.Println(`
+#********* Kunde löschen ***********
+# gib die ID des zu löschenden Kunden ein:
 `)
 }
 

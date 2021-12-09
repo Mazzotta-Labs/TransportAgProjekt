@@ -1,8 +1,8 @@
 package cli
 
 import (
-	"TransportAgProjekt1/model"
-	"TransportAgProjekt1/model/entity"
+	"TransportAgProjekt/model"
+	"TransportAgProjekt/model/entity"
 	"bufio"
 	"fmt"
 	"log"
@@ -67,20 +67,30 @@ func parseCommand(input string) {
 		PrintMenue()
 		break
 	case input == "3":
-		ClearTerminal()
-		PrintCustomerMenu()
 	out3:
 		for true {
+			ClearTerminal()
+			PrintCustomerMenu()
+			result := model.FindAllCustomer()
+			printCustomerList(result)
 			command := askForCommand()
 			switch {
 			case command == "1":
-				//TODO
+				PrintAddCustomer()
+				command := askForCommand()
+				customer := createCustomer(command)
+				model.AddCustomer(*customer)
 				break
 			case command == "2":
-				//TODO
+				PrintUpdateCustomer()
+				command := askForCommand()
+				customer := createCustomer(command)
+				model.UpdateCustomer(*customer)
 				break
 			case command == "3":
-				//TODO
+				PrintDeleteCustomer()
+				command := askForCommand()
+				model.DeleteCustomer(command)
 				break
 			case command == "q":
 				break out3
@@ -140,9 +150,42 @@ func createBook(response string) *entity.Book {
 
 */
 
+func createCustomer(response string) *entity.Customer {
+	customerInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+	return &entity.Customer{
+		CustomerId:      toInt(customerInfos[0]),
+		CustomerName:    customerInfos[1],
+		CustomerPrename: customerInfos[2],
+		TelNr:           customerInfos[3],
+		Street:          customerInfos[4],
+		Plz:             customerInfos[5],
+		Town:            customerInfos[6],
+		Country:         customerInfos[7],
+	}
+}
+
 func printDriverList(driversToPrint []entity.Driver) {
 	for i, driver := range driversToPrint {
-		fmt.Println(i+1, "| Fahrer ID:", driver.DriverId+",", "Name:", driver.Name+",", "Vorname:", driver.Prename+",", "Fahreug ID:", driver.VehicleId+",", "Fahrzeug Marke:", driver.Brand+",", "Fahrzeugnummer:", driver.Number)
+		fmt.Println(i+1,
+			"| Fahrer ID:", driver.DriverId+",",
+			"Name:", driver.Name+",",
+			"Vorname:", driver.Prename+",",
+			"Fahreug ID:", driver.VehicleId+",",
+			"Fahrzeug Marke:", driver.Brand+",",
+			"Fahrzeugnummer:", driver.Number)
+	}
+}
+
+func printCustomerList(customersToPrint []entity.Customer) {
+	for i, customer := range customersToPrint {
+		fmt.Println(i+1, "| Kunden ID:", toStr(customer.CustomerId)+",",
+			"Name:", customer.CustomerName+",",
+			"Vorname:", customer.CustomerPrename+",",
+			"Tel:", customer.TelNr+",",
+			"PLZ:", customer.Plz+",",
+			"Ort:", customer.Town,
+			"Strasse:", customer.Street,
+			"Land:", customer.Country)
 	}
 }
 
@@ -170,4 +213,9 @@ func ClearTerminal() {
 func toInt(info string) int {
 	aInt, _ := strconv.Atoi(info)
 	return aInt
+}
+
+func toStr(info int) string {
+	aStr := strconv.Itoa(info)
+	return aStr
 }
