@@ -2,17 +2,17 @@ package entity
 
 // Product as type
 type Product struct {
-	productId   int
-	description string
-	name        string
+	ProductId   int
+	Description string
+	Name        string
 	categoryId  int
 }
 
 // Categorie as type
 type Categorie struct {
-	categoryId int
-	weight     float64
-	size       float64
-	fragile    bool
-	name       string
+	CategoryId int
+	Weight     float64
+	Size       float64
+	Fragile    bool
+	Name       string
 }

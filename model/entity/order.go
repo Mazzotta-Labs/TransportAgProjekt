@@ -2,9 +2,9 @@ package entity
 
 // Order as type
 type Order struct {
-	orderId    int
-	productsId []int
-	orderDate  int
-	customerId int
-	driverId   int
+	OrderId    int
+	ProductsId []int
+	OrderDate  int //passendes Zeitformat?
+	CustomerId int
+	DriverId   int
 }

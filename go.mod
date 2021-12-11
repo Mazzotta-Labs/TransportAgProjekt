@@ -1,4 +1,4 @@
-module TransportAgProjekt1
+module TransportAgProjekt
 
 go 1.15
 
