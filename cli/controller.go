@@ -14,6 +14,8 @@ import (
 
 func parseCommand(input string) {
 	switch {
+	case input == "0":
+		test()
 	case input == "1":
 		ClearTerminal()
 		PrintOrderMenu()
