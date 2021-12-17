@@ -3,6 +3,7 @@ package mysql
 import (
 	"TransportAgProjekt/model/entity"
 	"database/sql"
+
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -11,6 +12,8 @@ var db *sql.DB
 type MySqlRepository struct {
 	drivers   []entity.Driver
 	customers []entity.Customer
+	orders    []entity.Order
+	products  []entity.Product
 }
 
 func NewMySqlRepository() *MySqlRepository {
@@ -18,11 +21,13 @@ func NewMySqlRepository() *MySqlRepository {
 	db = openDatabase()
 	repository.drivers = repository.FindAllDriver()
 	repository.customers = repository.FindAllCustomer()
+	// repository.orders = repository.FindAllOrder()
+	//repository.products = repository.FindAllProduct()
 	return &repository
 }
 
 func openDatabase() *sql.DB {
-	db, err := sql.Open("mysql", "root:1234@tcp(localhost:3306)/transportag")
+	db, err := sql.Open("mysql", "root:root@tcp(localhost:3306)/transportag")
 	if err != nil {
 		panic(err.Error())
 	}

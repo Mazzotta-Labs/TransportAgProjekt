@@ -5,7 +5,7 @@ type Product struct {
 	ProductId   int
 	Description string
 	Name        string
-	categoryId  int
+	CategoryId  int
 }
 
 // Categorie as type

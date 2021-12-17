@@ -5,6 +5,8 @@ import "TransportAgProjekt/model/entity"
 type InMemoryRepository struct {
 	drivers   []entity.Driver
 	customers []entity.Customer
+	orders    []entity.Order
+	products  []entity.Product
 }
 
 //
@@ -60,3 +62,57 @@ func (r *InMemoryRepository) UpdateDriver(driver entity.Driver) {
 func (r *InMemoryRepository) DeleteDriver(driver entity.Driver) {
 	//TODO
 }
+
+//
+//Order
+//
+func (r *InMemoryRepository) FindAllOrder() []entity.Order {
+	return r.orders
+}
+
+func (r *InMemoryRepository) AddOrder(order entity.Order) {
+	r.orders = append(r.orders, order)
+}
+
+func (r *InMemoryRepository) UpdateOrder(order entity.Order) {
+	for i, d := range r.orders {
+		if d.OrderId == order.OrderId {
+			r.orders[i] = order
+		}
+	}
+}
+
+func (r *InMemoryRepository) DeleteOrder(order entity.Order) {
+	for i, d := range r.orders {
+		if d.OrderId == order.OrderId {
+			r.orders[i] = r.orders[len(r.orders)-1]
+		}
+	}
+}
+
+//
+//Product
+//
+// func (r *InMemoryRepository) FindAllProduct() []entity.Product {
+// 	return r.products
+// }
+
+// func (r *InMemoryRepository) AddProduct(product entity.Product) {
+// 	r.products = append(r.products, product)
+// }
+
+// func (r *InMemoryRepository) UpdateProduct(product entity.Product) {
+// 	for i, d := range r.products {
+// 		if d.ProductId == product.ProductId {
+// 			r.products[i] = product
+// 		}
+// 	}
+// }
+
+// func (r *InMemoryRepository) DeleteProduct(product entity.Product) {
+// 	for i, d := range r.products {
+// 		if d.ProductId == product.ProductId {
+// 			r.products[i] = r.products[len(r.products)-1]
+// 		}
+// 	}
+// }

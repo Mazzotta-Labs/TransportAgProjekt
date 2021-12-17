@@ -16,6 +16,14 @@ type Repository interface {
 	AddCustomer(customer entity.Customer)
 	UpdateCustomer(customer entity.Customer)
 	DeleteCustomer(customer string)
+	FindAllOrder() []entity.Order
+	AddOrder(order entity.Order)
+	UpdateOrder(order entity.Order)
+	DeleteOrder(order entity.Order)
+	FindAllProduct() []entity.Product
+	AddProduct(product entity.Product)
+	UpdateProduct(product entity.Product)
+	DeleteProduct(product entity.Product)
 }
 
 /*
