@@ -66,8 +66,8 @@ func UpdateProduct(product entity.Product) {
 	internal.R.UpdateProduct(product)
 }
 
-func DeleteProduct(product entity.Product) {
-	internal.R.DeleteProduct(product)
+func DeleteProduct(productId string) {
+	internal.R.DeleteProduct(productId)
 }
 
 /*

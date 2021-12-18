@@ -117,18 +117,28 @@ func parseCommand(input string) {
 	case input == "4":
 		ClearTerminal()
 		PrintProductMenu()
+		products := model.FindAllProduct()
+		printProductList(products)
 	out4:
 		for true {
 			command := askForCommand()
 			switch {
 			case command == "1":
-				//TODO
+				PrintAddProduct()
+				command := askForCommand()
+				product := createProduct(command)
+				model.AddProduct(*product)
 				break
 			case command == "2":
-				//TODO
+				PrintUpdateProduct()
+				command := askForCommand()
+				product := createProduct(command)
+				model.UpdateProduct(*product)
 				break
 			case command == "3":
-				//TODO
+				PrintDeleteProduct()
+				command := askForCommand()
+				model.DeleteProduct(command)
 				break
 			case command == "q":
 				break out4
@@ -179,7 +189,6 @@ func createCustomer(response string) *entity.Customer {
 
 func createOrder(response string) *entity.Order {
 	orderInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
-	dateStamp, err := time.Parse("2006-01-02", orderInfos[1])
 	intCustomerVar, err := strconv.Atoi(orderInfos[2])
 	intDriverVar, err := strconv.Atoi(orderInfos[3])
 	if err != nil {
@@ -189,9 +198,20 @@ func createOrder(response string) *entity.Order {
 
 	return &entity.Order{
 		OrderId:    toInt(orderInfos[0]),
-		OrderDate:  dateStamp.Local(),
+		OrderDate:  orderInfos[1],
 		CustomerId: intCustomerVar,
 		DriverId:   intDriverVar,
+	}
+}
+
+func createProduct(response string) *entity.Product {
+	productInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+
+	return &entity.Product{
+		ProductId:   toInt(productInfos[0]),
+		Description: productInfos[1],
+		CategoryId:  toInt(productInfos[2]),
+		Name:        productInfos[3],
 	}
 }
 
@@ -222,10 +242,20 @@ func printCustomerList(customersToPrint []entity.Customer) {
 
 func printOrderList(ordersToPrint []entity.Order) {
 	for i, order := range ordersToPrint {
+		date, _ := time.Parse("2006-01-02", order.OrderDate)
 		fmt.Println(i+1, "| Order ID:", toStr(order.OrderId)+",",
-			"Datum:", order.OrderDate.Format("RFC822")+",",
+			"Datum:", date.Format("2006-01-02")+",",
 			"Kunden Id:", strconv.Itoa(order.CustomerId)+",",
-			"Fahrer Id:", strconv.Itoa(order.DriverId)+",")
+			"Fahrer Id:", strconv.Itoa(order.DriverId))
+	}
+}
+
+func printProductList(productsToPrint []entity.Product) {
+	for i, product := range productsToPrint {
+		fmt.Println(i+1, "| Product ID:", toStr(product.ProductId)+",",
+			"Beschreibung:", product.Description+",",
+			"Kategorie Id:", strconv.Itoa(product.CategoryId)+",",
+			"Name:", product.Name)
 	}
 }
 

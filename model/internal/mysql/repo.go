@@ -21,8 +21,8 @@ func NewMySqlRepository() *MySqlRepository {
 	db = openDatabase()
 	repository.drivers = repository.FindAllDriver()
 	repository.customers = repository.FindAllCustomer()
-	// repository.orders = repository.FindAllOrder()
-	//repository.products = repository.FindAllProduct()
+	repository.orders = repository.FindAllOrder()
+	repository.products = repository.FindAllProduct()
 	return &repository
 }
 

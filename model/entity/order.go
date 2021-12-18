@@ -1,12 +1,10 @@
 package entity
 
-import "time"
-
 // Order as type
 type Order struct {
 	OrderId    int
 	ProductsId int
-	OrderDate  time.Time
+	OrderDate  string
 	CustomerId int
 	DriverId   int
 }

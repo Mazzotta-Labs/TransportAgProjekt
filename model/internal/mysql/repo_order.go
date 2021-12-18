@@ -6,7 +6,7 @@ import (
 
 func (r *MySqlRepository) FindAllOrder() []entity.Order {
 	var orders []entity.Order
-	result, err := db.Query("select o.id, o.order_date, c.id, d.id, p.id from `order` o left join customer c on c.id = o.customer_id left join driver d on d.id = o.driver_id left join ordertoproduct op on op.order_id = o.id left join product p on p.id = op.product_id order by o.id")
+	result, err := db.Query("select o.id, o.order_date, c.id, d.id from `order` o left join customer c on c.id = o.customer_id left join driver d on d.id = o.driver_id left join ordertoproduct op on op.order_id = o.id left join product p on p.id = op.product_id order by o.id")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -14,7 +14,7 @@ func (r *MySqlRepository) FindAllOrder() []entity.Order {
 	for result.Next() {
 		var order entity.Order
 
-		err := result.Scan(&order.OrderId, &order.OrderDate, &order.CustomerId, &order.DriverId, &order.ProductsId)
+		err := result.Scan(&order.OrderId, &order.OrderDate, &order.CustomerId, &order.DriverId)
 		if err != nil {
 			panic(err.Error())
 		}

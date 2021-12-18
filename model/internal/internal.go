@@ -25,15 +25,3 @@ type Repository interface {
 	UpdateProduct(product entity.Product)
 	DeleteProduct(product entity.Product)
 }
-
-/*
-var R = mysql.NewMySqlRepository()
-
-
-type Repository interface {
-	FindAll() []entity.Book
-	AddBook(book entity.Book)
-	UpdateBook(book entity.Book)
-}
-
-*/
