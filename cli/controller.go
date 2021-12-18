@@ -10,6 +10,7 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func parseCommand(input string) {
@@ -19,18 +20,28 @@ func parseCommand(input string) {
 	case input == "1":
 		ClearTerminal()
 		PrintOrderMenu()
+		orders := model.FindAllOrder()
+		printOrderList(orders)
 	out1:
 		for true {
 			command := askForCommand()
 			switch {
 			case command == "1":
-				//TODO
+				PrintAddOrder()
+				command := askForCommand()
+				order := createOrder(command)
+				model.AddOrder(*order)
 				break
 			case command == "2":
-				//TODO
+				PrintUpdateOrder()
+				command := askForCommand()
+				order := createOrder(command)
+				model.UpdateOrder(*order)
 				break
 			case command == "3":
-				//TODO
+				PrintDeleteOrder()
+				command := askForCommand()
+				model.DeleteOrder(command)
 				break
 			case command == "q":
 				break out1
@@ -166,6 +177,24 @@ func createCustomer(response string) *entity.Customer {
 	}
 }
 
+func createOrder(response string) *entity.Order {
+	orderInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+	dateStamp, err := time.Parse("2006-01-02", orderInfos[1])
+	intCustomerVar, err := strconv.Atoi(orderInfos[2])
+	intDriverVar, err := strconv.Atoi(orderInfos[3])
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	return &entity.Order{
+		OrderId:    toInt(orderInfos[0]),
+		OrderDate:  dateStamp.Local(),
+		CustomerId: intCustomerVar,
+		DriverId:   intDriverVar,
+	}
+}
+
 func printDriverList(driversToPrint []entity.Driver) {
 	for i, driver := range driversToPrint {
 		fmt.Println(i+1,
@@ -188,6 +217,15 @@ func printCustomerList(customersToPrint []entity.Customer) {
 			"Ort:", customer.Town,
 			"Strasse:", customer.Street,
 			"Land:", customer.Country)
+	}
+}
+
+func printOrderList(ordersToPrint []entity.Order) {
+	for i, order := range ordersToPrint {
+		fmt.Println(i+1, "| Order ID:", toStr(order.OrderId)+",",
+			"Datum:", order.OrderDate.Format("RFC822")+",",
+			"Kunden Id:", strconv.Itoa(order.CustomerId)+",",
+			"Fahrer Id:", strconv.Itoa(order.DriverId)+",")
 	}
 }
 

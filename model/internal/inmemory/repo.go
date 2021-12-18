@@ -93,26 +93,26 @@ func (r *InMemoryRepository) DeleteOrder(order entity.Order) {
 //
 //Product
 //
-// func (r *InMemoryRepository) FindAllProduct() []entity.Product {
-// 	return r.products
-// }
+func (r *InMemoryRepository) FindAllProduct() []entity.Product {
+	return r.products
+}
 
-// func (r *InMemoryRepository) AddProduct(product entity.Product) {
-// 	r.products = append(r.products, product)
-// }
+func (r *InMemoryRepository) AddProduct(product entity.Product) {
+	r.products = append(r.products, product)
+}
 
-// func (r *InMemoryRepository) UpdateProduct(product entity.Product) {
-// 	for i, d := range r.products {
-// 		if d.ProductId == product.ProductId {
-// 			r.products[i] = product
-// 		}
-// 	}
-// }
+func (r *InMemoryRepository) UpdateProduct(product entity.Product) {
+	for i, d := range r.products {
+		if d.ProductId == product.ProductId {
+			r.products[i] = product
+		}
+	}
+}
 
-// func (r *InMemoryRepository) DeleteProduct(product entity.Product) {
-// 	for i, d := range r.products {
-// 		if d.ProductId == product.ProductId {
-// 			r.products[i] = r.products[len(r.products)-1]
-// 		}
-// 	}
-// }
+func (r *InMemoryRepository) DeleteProduct(product entity.Product) {
+	for i, d := range r.products {
+		if d.ProductId == product.ProductId {
+			r.products[i] = r.products[len(r.products)-1]
+		}
+	}
+}

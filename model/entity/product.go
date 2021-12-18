@@ -8,8 +8,8 @@ type Product struct {
 	CategoryId  int
 }
 
-// Categorie as type
-type Categorie struct {
+// Category as type
+type Category struct {
 	CategoryId int
 	Weight     float64
 	Size       float64

@@ -50,8 +50,8 @@ func UpdateOrder(order entity.Order) {
 	internal.R.UpdateOrder(order)
 }
 
-func DeleteOrder(order entity.Order) {
-	internal.R.DeleteOrder(order)
+func DeleteOrder(orderId string) {
+	internal.R.DeleteOrder(orderId)
 }
 
 func FindAllProduct() []entity.Product {
