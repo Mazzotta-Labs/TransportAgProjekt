@@ -38,6 +38,38 @@ func DeleteCustomer(customer string) {
 	internal.R.DeleteCustomer(customer)
 }
 
+func FindAllOrder() []entity.Order {
+	return internal.R.FindAllOrder()
+}
+
+func AddOrder(order entity.Order) {
+	internal.R.AddOrder(order)
+}
+
+func UpdateOrder(order entity.Order) {
+	internal.R.UpdateOrder(order)
+}
+
+func DeleteOrder(orderId string) {
+	internal.R.DeleteOrder(orderId)
+}
+
+func FindAllProduct() []entity.Product {
+	return internal.R.FindAllProduct()
+}
+
+func AddProduct(product entity.Product) {
+	internal.R.AddProduct(product)
+}
+
+func UpdateProduct(product entity.Product) {
+	internal.R.UpdateProduct(product)
+}
+
+func DeleteProduct(productId string) {
+	internal.R.DeleteProduct(productId)
+}
+
 /*
 func AddBook(book entity.Book) {
 	internal.R.AddBook(book)
