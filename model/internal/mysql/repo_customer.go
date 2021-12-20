@@ -36,7 +36,7 @@ func (r *MySqlRepository) AddCustomer(customer entity.Customer) {
 	town := customer.Town
 	country := customer.Country
 
-	stmt, err := db.Prepare("insert into Address values (?,?,?,?,?)")
+	stmt, err := db.Prepare("insert into Address (id,street, plz, town, country) values (?,?,?,?,?)")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -45,7 +45,7 @@ func (r *MySqlRepository) AddCustomer(customer entity.Customer) {
 		panic(err.Error())
 	}
 
-	stmt, err = db.Prepare("insert into Customer values (?,?,?,?,?)")
+	stmt, err = db.Prepare("insert into Customer (id ,name, prename, tel_nr, address_id) values (?,?,?,?,?)")
 	if err != nil {
 		panic(err.Error())
 	}

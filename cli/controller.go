@@ -80,7 +80,7 @@ func parseCommand(input string) {
 		PrintMenue()
 		break
 	case input == "3":
-	out3:
+	out3: //Marke da aus 2 Schleifen in ein anander ausgestiegen werden muss
 		for true {
 			ClearTerminal()
 			PrintCustomerMenu()
@@ -108,7 +108,8 @@ func parseCommand(input string) {
 			case command == "q":
 				break out3
 			default:
-				fmt.Println("ungültige Eingabe")
+				println("ungültige Eingabe")
+				time.Sleep(2 * time.Second)
 			}
 		}
 		ClearTerminal()
@@ -156,6 +157,7 @@ func parseCommand(input string) {
 		break
 	default:
 		println("ungültige Eingabe")
+		time.Sleep(2 * time.Second)
 	}
 }
 
@@ -218,7 +220,7 @@ func createProduct(response string) *entity.Product {
 func printDriverList(driversToPrint []entity.Driver) {
 	for i, driver := range driversToPrint {
 		fmt.Println(i+1,
-			"| Fahrer ID:", driver.DriverId+",",
+			"| Fahrer ID:", toStr(driver.DriverId)+",",
 			"Name:", driver.Name+",",
 			"Vorname:", driver.Prename+",",
 			"Fahreug ID:", driver.VehicleId+",",
