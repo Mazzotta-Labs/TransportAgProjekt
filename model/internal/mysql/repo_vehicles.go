@@ -26,17 +26,18 @@ func (r *MySqlRepository) FindAllVehicle() []entity.Vehicle {
 func (r *MySqlRepository) AddVehicle(vehicle entity.Vehicle) {
 	vehicleId := vehicle.VehicleId
 	brand := vehicle.Brand
-	driverId := vehicle.DriverId
+	//driverId := vehicle.DriverId
 	number := vehicle.Number
 
-	stmt, err := db.Prepare("insert into model values (?,?,?,?)")
+	stmt, err := db.Prepare("insert into vehicle values (?,?,?)")
 	if err != nil {
 		panic(err.Error())
 	}
-	_, err = stmt.Exec(vehicleId, brand, driverId, number)
+	_, err = stmt.Exec(vehicleId, brand, number)
 	if err != nil {
 		panic(err.Error())
 	}
+
 }
 
 func (r *MySqlRepository) UpdateVehicle(vehicle entity.Vehicle) {

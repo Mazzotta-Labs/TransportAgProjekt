@@ -164,7 +164,10 @@ func parseCommand(input string) {
 			command := askForCommand()
 			switch {
 			case command == "1":
-				//TODO
+				PrintAddOrder()
+				command := askForCommand()
+				order := createVehicle(command)
+				model.AddVehicles(*order)
 				break
 			case command == "2":
 				//TODO
@@ -217,6 +220,15 @@ func createCustomer(response string) *entity.Customer {
 		Plz:             customerInfos[5],
 		Town:            customerInfos[6],
 		Country:         customerInfos[7],
+	}
+}
+
+func createVehicle(response string) *entity.Vehicle {
+	customerInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+	return &entity.Vehicle{
+		VehicleId: toInt(customerInfos[0]),
+		Brand:     customerInfos[1],
+		Number:    customerInfos[2],
 	}
 }
 

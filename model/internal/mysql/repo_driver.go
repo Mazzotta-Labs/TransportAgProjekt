@@ -1,8 +1,6 @@
 package mysql
 
-import (
-	"TransportAgProjekt/model/entity"
-)
+import "TransportAgProjekt/model/entity"
 
 func (r *MySqlRepository) FindAllDriver() []entity.Driver {
 	var drivers []entity.Driver
