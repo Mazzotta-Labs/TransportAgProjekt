@@ -10,25 +10,38 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func parseCommand(input string) {
 	switch {
+	case input == "0":
+		test()
 	case input == "1":
 		ClearTerminal()
 		PrintOrderMenu()
+		orders := model.FindAllOrder()
+		printOrderList(orders)
 	out1:
 		for true {
 			command := askForCommand()
 			switch {
 			case command == "1":
-				//TODO
+				PrintAddOrder()
+				command := askForCommand()
+				order := createOrder(command)
+				model.AddOrder(*order)
 				break
 			case command == "2":
-				//TODO
+				PrintUpdateOrder()
+				command := askForCommand()
+				order := createOrder(command)
+				model.UpdateOrder(*order)
 				break
 			case command == "3":
-				//TODO
+				PrintDeleteOrder()
+				command := askForCommand()
+				model.DeleteOrder(command)
 				break
 			case command == "q":
 				break out1
@@ -67,7 +80,7 @@ func parseCommand(input string) {
 		PrintMenue()
 		break
 	case input == "3":
-	out3:
+	out3: //Marke da aus 2 Schleifen in ein anander ausgestiegen werden muss
 		for true {
 			ClearTerminal()
 			PrintCustomerMenu()
@@ -95,7 +108,8 @@ func parseCommand(input string) {
 			case command == "q":
 				break out3
 			default:
-				fmt.Println("ungültige Eingabe")
+				println("ungültige Eingabe")
+				time.Sleep(2 * time.Second)
 			}
 		}
 		ClearTerminal()
@@ -104,18 +118,28 @@ func parseCommand(input string) {
 	case input == "4":
 		ClearTerminal()
 		PrintProductMenu()
+		products := model.FindAllProduct()
+		printProductList(products)
 	out4:
 		for true {
 			command := askForCommand()
 			switch {
 			case command == "1":
-				//TODO
+				PrintAddProduct()
+				command := askForCommand()
+				product := createProduct(command)
+				model.AddProduct(*product)
 				break
 			case command == "2":
-				//TODO
+				PrintUpdateProduct()
+				command := askForCommand()
+				product := createProduct(command)
+				model.UpdateProduct(*product)
 				break
 			case command == "3":
-				//TODO
+				PrintDeleteProduct()
+				command := askForCommand()
+				model.DeleteProduct(command)
 				break
 			case command == "q":
 				break out4
@@ -133,6 +157,7 @@ func parseCommand(input string) {
 		break
 	default:
 		println("ungültige Eingabe")
+		time.Sleep(2 * time.Second)
 	}
 }
 
@@ -164,10 +189,38 @@ func createCustomer(response string) *entity.Customer {
 	}
 }
 
+func createOrder(response string) *entity.Order {
+	orderInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+	intCustomerVar, err := strconv.Atoi(orderInfos[2])
+	intDriverVar, err := strconv.Atoi(orderInfos[3])
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
+	return &entity.Order{
+		OrderId:    toInt(orderInfos[0]),
+		OrderDate:  orderInfos[1],
+		CustomerId: intCustomerVar,
+		DriverId:   intDriverVar,
+	}
+}
+
+func createProduct(response string) *entity.Product {
+	productInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+
+	return &entity.Product{
+		ProductId:   toInt(productInfos[0]),
+		Description: productInfos[1],
+		CategoryId:  toInt(productInfos[2]),
+		Name:        productInfos[3],
+	}
+}
+
 func printDriverList(driversToPrint []entity.Driver) {
 	for i, driver := range driversToPrint {
 		fmt.Println(i+1,
-			"| Fahrer ID:", driver.DriverId+",",
+			"| Fahrer ID:", toStr(driver.DriverId)+",",
 			"Name:", driver.Name+",",
 			"Vorname:", driver.Prename+",",
 			"Fahreug ID:", driver.VehicleId+",",
@@ -186,6 +239,25 @@ func printCustomerList(customersToPrint []entity.Customer) {
 			"Ort:", customer.Town,
 			"Strasse:", customer.Street,
 			"Land:", customer.Country)
+	}
+}
+
+func printOrderList(ordersToPrint []entity.Order) {
+	for i, order := range ordersToPrint {
+		date, _ := time.Parse("2006-01-02", order.OrderDate)
+		fmt.Println(i+1, "| Order ID:", toStr(order.OrderId)+",",
+			"Datum:", date.Format("2006-01-02")+",",
+			"Kunden Id:", strconv.Itoa(order.CustomerId)+",",
+			"Fahrer Id:", strconv.Itoa(order.DriverId))
+	}
+}
+
+func printProductList(productsToPrint []entity.Product) {
+	for i, product := range productsToPrint {
+		fmt.Println(i+1, "| Product ID:", toStr(product.ProductId)+",",
+			"Beschreibung:", product.Description+",",
+			"Kategorie Id:", strconv.Itoa(product.CategoryId)+",",
+			"Name:", product.Name)
 	}
 }
 

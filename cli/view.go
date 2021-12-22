@@ -31,6 +31,30 @@ func PrintOrderMenu() {
 `)
 }
 
+func PrintAddOrder() {
+	fmt.Println(`
+#********* Auftrag erstellen ***********
+# gib folgendes ein:
+# "Datum", "Kunden Id", "Fahrer Id"
+`)
+}
+
+func PrintUpdateOrder() {
+	fmt.Println(`
+#********* Order bearbeiten ***********
+# gib folgendes ein wobei "ID" von
+# einer bestehenden Order sein muss:
+# "ID", "Datum", "Kunden Id", "Fahrer Id"
+`)
+}
+
+func PrintDeleteOrder() {
+	fmt.Println(`
+#********* Auftrag löschen ***********
+# gib die ID des zu löschenden Auftrags ein:
+`)
+}
+
 func PrintDriverMenu() {
 	fmt.Println(`
 ########################################
@@ -83,6 +107,30 @@ func PrintDeleteCustomer() {
 	fmt.Println(`
 #********* Kunde löschen ***********
 # gib die ID des zu löschenden Kunden ein:
+`)
+}
+
+func PrintAddProduct() {
+	fmt.Println(`
+#********* Produkt erstellen ***********
+# gib folgendes ein:
+# "Beschreibung", "Kategorie Id", "Name"
+`)
+}
+
+func PrintUpdateProduct() {
+	fmt.Println(`
+#********* Produkt bearbeiten ***********
+# gib folgendes ein wobei "ID" von
+# einem bestehenden Produkt sein muss:
+# "ID", "Beschreibung", "Kategorie Id", "Name"
+`)
+}
+
+func PrintDeleteProduct() {
+	fmt.Println(`
+#********* Produkt löschen ***********
+# gib die ID des zu löschenden Produkts ein:
 `)
 }
 

@@ -5,11 +5,11 @@ type Product struct {
 	ProductId   int
 	Description string
 	Name        string
-	categoryId  int
+	CategoryId  int
 }
 
-// Categorie as type
-type Categorie struct {
+// Category as type
+type Category struct {
 	CategoryId int
 	Weight     float64
 	Size       float64
