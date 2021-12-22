@@ -14,6 +14,7 @@ type MySqlRepository struct {
 	customers []entity.Customer
 	orders    []entity.Order
 	products  []entity.Product
+	vehicles  []entity.Vehicle
 }
 
 func NewMySqlRepository() *MySqlRepository {
@@ -23,6 +24,7 @@ func NewMySqlRepository() *MySqlRepository {
 	repository.customers = repository.FindAllCustomer()
 	repository.orders = repository.FindAllOrder()
 	repository.products = repository.FindAllProduct()
+	repository.vehicles = repository.FindAllVehicle()
 	return &repository
 }
 
