@@ -7,6 +7,7 @@ type InMemoryRepository struct {
 	customers []entity.Customer
 	orders    []entity.Order
 	products  []entity.Product
+	vehicles  []entity.Vehicle
 }
 
 //
@@ -113,6 +114,25 @@ func (r *InMemoryRepository) DeleteProduct(product entity.Product) {
 	for i, d := range r.products {
 		if d.ProductId == product.ProductId {
 			r.products[i] = r.products[len(r.products)-1]
+		}
+	}
+}
+
+//
+//Vehicle
+//
+func (r *InMemoryRepository) FindAllVehicle() []entity.Vehicle {
+	return r.vehicles
+}
+
+func (r *InMemoryRepository) AddVehicle(vehicle entity.Vehicle) {
+	r.vehicles = append(r.vehicles, vehicle)
+}
+
+func (r *InMemoryRepository) UpdateVehicle(vehicle entity.Vehicle) {
+	for i, d := range r.vehicles {
+		if d.VehicleId == vehicle.VehicleId {
+			r.vehicles[i] = vehicle
 		}
 	}
 }

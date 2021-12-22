@@ -13,6 +13,7 @@ func PrintMenue() {
 # 2. Mitarbeiter
 # 3. Kunden
 # 4. Produkte
+# 5. Fahrzeuge
 #
 # q. Beenden
 `)
@@ -146,6 +147,23 @@ func PrintProductMenu() {
 # q. Zurück
 `)
 }
+
+func PrintVehicleMenu() {
+	fmt.Println(`
+########################################
+#************* Fahrezeuge* *************
+#********* Wähle eine Option ***********
+# 1. Fahrzeug erstellen
+# 2. Fahrzeug bearbeiten
+# 3. Fahrzeug löschen
+#
+# q. Zurück
+#
+##************* Fahrzeuge *************
+`)
+}
+
+//Goodbye
 
 func printGodBye() {
 	fmt.Println("Good bye!")

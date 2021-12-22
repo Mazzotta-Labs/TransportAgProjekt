@@ -70,6 +70,24 @@ func DeleteProduct(productId string) {
 	internal.R.DeleteProduct(productId)
 }
 
+// Vehicles
+
+func FindAllVehicles() []entity.Vehicle {
+	return internal.R.FindAllVehicle()
+}
+
+func AddVehicles(vehicle entity.Vehicle) {
+	internal.R.AddVehicle(vehicle)
+}
+
+func UpdateVehicles(vehicle entity.Vehicle) {
+	internal.R.UpdateVehicle(vehicle)
+}
+
+func DeleteVehicles(vehicle entity.Vehicle) {
+	internal.R.DeleteVehicle(vehicle)
+}
+
 /*
 func AddBook(book entity.Book) {
 	internal.R.AddBook(book)

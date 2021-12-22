@@ -24,4 +24,8 @@ type Repository interface {
 	AddProduct(product entity.Product)
 	UpdateProduct(product entity.Product)
 	DeleteProduct(product entity.Product)
+	FindAllVehicle() []entity.Vehicle
+	AddVehicle(vehicle entity.Vehicle)
+	UpdateVehicle(vehicle entity.Vehicle)
+	DeleteVehicle(vehicle entity.Vehicle)
 }

@@ -150,6 +150,37 @@ func parseCommand(input string) {
 		ClearTerminal()
 		PrintMenue()
 		break
+	case input == "5":
+		ClearTerminal()
+		PrintVehicleMenu()
+		vehicles := model.FindAllProduct()
+		printProductList(vehicles)
+	out5:
+		for true {
+			ClearTerminal()
+			PrintVehicleMenu()
+			vehicles := model.FindAllVehicles()
+			printVehicleList(vehicles)
+			command := askForCommand()
+			switch {
+			case command == "1":
+				//TODO
+				break
+			case command == "2":
+				//TODO
+				break
+			case command == "3":
+				//TODO
+				break
+			case command == "q":
+				break out5
+			default:
+				fmt.Println("ungültige Eingabe")
+			}
+		}
+		ClearTerminal()
+		PrintMenue()
+		break
 	case input == "q":
 		ClearTerminal()
 		printGodBye()
@@ -226,6 +257,16 @@ func printDriverList(driversToPrint []entity.Driver) {
 			"Fahreug ID:", driver.VehicleId+",",
 			"Fahrzeug Marke:", driver.Brand+",",
 			"Fahrzeugnummer:", driver.Number)
+	}
+}
+
+func printVehicleList(vehiclesToPrint []entity.Vehicle) {
+	for i, vehicle := range vehiclesToPrint {
+		fmt.Println(i+1,
+			"| Fahrzeug ID:", toStr(vehicle.VehicleId)+",",
+			"Marke:", vehicle.Brand+",",
+			"Fahrername:", vehicle.DriverId+",",
+			"Fahreug Nummer:", vehicle.Number+",")
 	}
 }
 
