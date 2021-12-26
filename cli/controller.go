@@ -80,7 +80,7 @@ func parseCommand(input string) {
 		PrintMenue()
 		break
 	case input == "3":
-	out3: //Marke da aus 2 Schleifen in ein anander ausgestiegen werden muss
+	out3: //Marke da aus 2 Schleifen in einander ausgestiegen werden muss
 		for true {
 			ClearTerminal()
 			PrintCustomerMenu()
@@ -288,9 +288,9 @@ func printCustomerList(customersToPrint []entity.Customer) {
 			"Name:", customer.CustomerName+",",
 			"Vorname:", customer.CustomerPrename+",",
 			"Tel:", customer.TelNr+",",
+			"Strasse:", customer.Street,
 			"PLZ:", customer.Plz+",",
 			"Ort:", customer.Town,
-			"Strasse:", customer.Street,
 			"Land:", customer.Country)
 	}
 }

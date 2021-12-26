@@ -81,9 +81,8 @@ func PrintCustomerMenu() {
 # 3. Kunden löschen
 #
 # q. Zurück
-
-
-#************* Mitarbeiter *************
+#
+#**************** Kunden ****************
 `)
 }
 
