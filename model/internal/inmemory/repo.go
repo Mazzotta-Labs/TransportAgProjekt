@@ -61,7 +61,11 @@ func (r *InMemoryRepository) UpdateDriver(driver entity.Driver) {
 }
 
 func (r *InMemoryRepository) DeleteDriver(driver entity.Driver) {
-	//TODO
+	for i, d := range r.drivers {
+		if d.DriverId == driver.DriverId {
+			r.drivers[i] = r.drivers[len(r.drivers)-1]
+		}
+	}
 }
 
 //

@@ -27,7 +27,7 @@ func (r *MySqlRepository) AddDriver(driver entity.Driver) {
 	prename := driver.Prename
 	vehicleId := driver.VehicleId
 
-	stmt, err := db.Prepare("insert into driver values (?,?,?,?")
+	stmt, err := db.Prepare("insert into driver (id, name, prename, vehicle_id) values (?,?,?,?")
 	if err != nil {
 		panic(err.Error())
 	}
