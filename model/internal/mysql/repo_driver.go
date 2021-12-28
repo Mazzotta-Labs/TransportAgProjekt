@@ -4,7 +4,7 @@ import "TransportAgProjekt/model/entity"
 
 func (r *MySqlRepository) FindAllDriver() []entity.Driver {
 	var drivers []entity.Driver
-	result, err := db.Query("select * from Driver join Vehicle using (id)")
+	result, err := db.Query("select * from driver d join vehicle v using (id)")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -26,14 +26,12 @@ func (r *MySqlRepository) AddDriver(driver entity.Driver) {
 	name := driver.Name
 	prename := driver.Prename
 	vehicleId := driver.VehicleId
-	brand := driver.Brand
-	number := driver.Number
 
-	stmt, err := db.Prepare("insert into model values (?,?,?,?,?,?)")
+	stmt, err := db.Prepare("insert into driver values (?,?,?,?")
 	if err != nil {
 		panic(err.Error())
 	}
-	_, err = stmt.Exec(driverId, name, prename, vehicleId, brand, number)
+	_, err = stmt.Exec(driverId, name, prename, vehicleId)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -41,8 +39,28 @@ func (r *MySqlRepository) AddDriver(driver entity.Driver) {
 
 func (r *MySqlRepository) UpdateDriver(driver entity.Driver) {
 	//TODO
+	driverId := driver.DriverId
+	name := driver.Name
+	prename := driver.Prename
+	vehicleId := driver.VehicleId
+
+	stmt, err := db.Prepare("update `Driver` set name = ?, prename = ?, vehicleId = ? where id = ?")
+	if err != nil {
+		panic(err.Error())
+	}
+	_, err = stmt.Exec(driverId, name, prename, vehicleId)
+	if err != nil {
+		panic(err.Error())
+	}
 }
 
-func (r *MySqlRepository) DeleteDriver(driver entity.Driver) {
-	//TODO
+func (r *MySqlRepository) DeleteDriver(DriverId string) {
+	stmt, err := db.Prepare("delete from driver where id = ?")
+	if err != nil {
+		panic(err.Error())
+	}
+	_, err = stmt.Exec(DriverId)
+	if err != nil {
+		panic(err.Error())
+	}
 }

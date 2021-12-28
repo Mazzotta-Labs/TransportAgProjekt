@@ -53,22 +53,34 @@ func parseCommand(input string) {
 		PrintMenue()
 		break
 	case input == "2":
+		ClearTerminal()
+		PrintDriverMenu()
+		drivers := model.FindAllDriver()
+		printDriverList(drivers)
 	out2:
 		for true {
-			ClearTerminal()
-			PrintDriverMenu()
-			drivers := model.FindAllDriver()
-			printDriverList(drivers)
 			command := askForCommand()
 			switch {
 			case command == "1":
-				//TODO
+				PrintAddDriver()
+				command := askForCommand()
+				driver := createDriver(command)
+				model.AddDriver(*driver)
 				break
 			case command == "2":
-				//TODO
+				PrintUpdateDriver()
+				command := askForCommand()
+				driver := createDriver(command)
+				model.UpdateDriver(*driver)
 				break
 			case command == "3":
-				//TODO
+				PrintDeleteDriver()
+				command := askForCommand()
+				model.DeleteDriver(command)
+				ClearTerminal()
+				PrintDriverMenu()
+				drivers := model.FindAllDriver()
+				printDriverList(drivers)
 				break
 			case command == "q":
 				break out2
@@ -229,6 +241,16 @@ func createVehicle(response string) *entity.Vehicle {
 		VehicleId: toInt(customerInfos[0]),
 		Brand:     customerInfos[1],
 		Number:    customerInfos[2],
+	}
+}
+
+func createDriver(response string) *entity.Driver {
+	driverInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+	return &entity.Driver{
+		DriverId:  toInt(driverInfos[0]),
+		Name:      driverInfos[1],
+		Prename:   driverInfos[2],
+		VehicleId: driverInfos[3],
 	}
 }
 

@@ -18,7 +18,7 @@ func UpdateDriver(driver entity.Driver) {
 	internal.R.UpdateDriver(driver)
 }
 
-func DeleteDriver(driver entity.Driver) {
+func DeleteDriver(driver string) {
 	internal.R.DeleteDriver(driver)
 }
 

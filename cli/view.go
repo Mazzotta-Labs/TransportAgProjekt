@@ -71,6 +71,30 @@ func PrintDriverMenu() {
 `)
 }
 
+func PrintAddDriver() {
+	fmt.Println(`
+#********* Mitarbeiter erstellen ***********
+# gib folgendes ein:
+# "ID", "Name", "Vorname", "Fahrzeug_ID"
+`)
+}
+
+func PrintUpdateDriver() {
+	fmt.Println(`
+#********* Mitarbeiter bearbeiten ***********
+# gib folgendes ein wobei "ID" von
+# einem bestehenden Mitarbeiter sein muss:
+# "ID", "Name", "Vorname", "Fahrzeug_ID" 
+`)
+}
+
+func PrintDeleteDriver() {
+	fmt.Println(`
+#********* Mitarbeiter löschen ***********
+# gib die ID des zu löschenden Mitarbeiter ein:
+`)
+}
+
 func PrintCustomerMenu() {
 	fmt.Println(`
 ########################################
