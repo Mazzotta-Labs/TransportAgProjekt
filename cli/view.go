@@ -75,7 +75,7 @@ func PrintAddDriver() {
 	fmt.Println(`
 #********* Mitarbeiter erstellen ***********
 # gib folgendes ein:
-# "ID", "Name", "Vorname", "Fahrzeug_ID"
+# "Name", "Vorname", "Fahrzeug_ID"
 `)
 }
 

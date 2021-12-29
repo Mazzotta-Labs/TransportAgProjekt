@@ -29,13 +29,13 @@ func parseCommand(input string) {
 			case command == "1":
 				PrintAddOrder()
 				command := askForCommand()
-				order := createOrder(command)
+				order := createOrder(command, true)
 				model.AddOrder(*order)
 				break
 			case command == "2":
 				PrintUpdateOrder()
 				command := askForCommand()
-				order := createOrder(command)
+				order := createOrder(command, false)
 				model.UpdateOrder(*order)
 				break
 			case command == "3":
@@ -64,13 +64,13 @@ func parseCommand(input string) {
 			case command == "1":
 				PrintAddDriver()
 				command := askForCommand()
-				driver := createDriver(command)
+				driver := createDriver(command, true)
 				model.AddDriver(*driver)
 				break
 			case command == "2":
 				PrintUpdateDriver()
 				command := askForCommand()
-				driver := createDriver(command)
+				driver := createDriver(command, false)
 				model.UpdateDriver(*driver)
 				break
 			case command == "3":
@@ -139,13 +139,13 @@ func parseCommand(input string) {
 			case command == "1":
 				PrintAddProduct()
 				command := askForCommand()
-				product := createProduct(command)
+				product := createProduct(command, true)
 				model.AddProduct(*product)
 				break
 			case command == "2":
 				PrintUpdateProduct()
 				command := askForCommand()
-				product := createProduct(command)
+				product := createProduct(command, false)
 				model.UpdateProduct(*product)
 				break
 			case command == "3":
@@ -244,23 +244,44 @@ func createVehicle(response string) *entity.Vehicle {
 	}
 }
 
-func createDriver(response string) *entity.Driver {
+func createDriver(response string, isCreate bool) *entity.Driver {
 	driverInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+	if isCreate {
+		return &entity.Driver{
+			Name:      driverInfos[0],
+			Prename:   driverInfos[1],
+			VehicleId: toInt(driverInfos[2]),
+		}
+	}
+
 	return &entity.Driver{
 		DriverId:  toInt(driverInfos[0]),
 		Name:      driverInfos[1],
 		Prename:   driverInfos[2],
-		VehicleId: driverInfos[3],
+		VehicleId: toInt(driverInfos[3]),
 	}
 }
 
-func createOrder(response string) *entity.Order {
+func createOrder(response string, isCreate bool) *entity.Order {
 	orderInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
-	intCustomerVar, err := strconv.Atoi(orderInfos[2])
-	intDriverVar, err := strconv.Atoi(orderInfos[3])
+	indexRange := 0
+	if isCreate {
+		indexRange = 1
+	}
+
+	intCustomerVar, err := strconv.Atoi(orderInfos[2-indexRange])
+	intDriverVar, err := strconv.Atoi(orderInfos[3-indexRange])
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
+	}
+
+	if isCreate {
+		return &entity.Order{
+			OrderDate:  orderInfos[0],
+			CustomerId: intCustomerVar,
+			DriverId:   intDriverVar,
+		}
 	}
 
 	return &entity.Order{
@@ -271,8 +292,16 @@ func createOrder(response string) *entity.Order {
 	}
 }
 
-func createProduct(response string) *entity.Product {
+func createProduct(response string, isCreate bool) *entity.Product {
 	productInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+
+	if isCreate {
+		return &entity.Product{
+			Description: productInfos[0],
+			CategoryId:  toInt(productInfos[1]),
+			Name:        productInfos[2],
+		}
+	}
 
 	return &entity.Product{
 		ProductId:   toInt(productInfos[0]),
@@ -288,7 +317,7 @@ func printDriverList(driversToPrint []entity.Driver) {
 			"| Fahrer ID:", toStr(driver.DriverId)+",",
 			"Name:", driver.Name+",",
 			"Vorname:", driver.Prename+",",
-			"Fahreug ID:", driver.VehicleId+",",
+			"Fahreug ID:", toStr(driver.VehicleId)+",",
 			"Fahrzeug Marke:", driver.Brand+",",
 			"Fahrzeugnummer:", driver.Number)
 	}

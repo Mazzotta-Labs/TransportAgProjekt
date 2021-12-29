@@ -22,33 +22,31 @@ func (r *MySqlRepository) FindAllDriver() []entity.Driver {
 }
 
 func (r *MySqlRepository) AddDriver(driver entity.Driver) {
-	driverId := driver.DriverId
 	name := driver.Name
 	prename := driver.Prename
 	vehicleId := driver.VehicleId
 
-	stmt, err := db.Prepare("insert into driver (id, name, prename, vehicle_id) values (?,?,?,?")
+	stmt, err := db.Prepare("insert into driver (name, prename, vehicle_id) values (?,?,?)")
 	if err != nil {
 		panic(err.Error())
 	}
-	_, err = stmt.Exec(driverId, name, prename, vehicleId)
+	_, err = stmt.Exec(name, prename, vehicleId)
 	if err != nil {
 		panic(err.Error())
 	}
 }
 
 func (r *MySqlRepository) UpdateDriver(driver entity.Driver) {
-	//TODO
 	driverId := driver.DriverId
 	name := driver.Name
 	prename := driver.Prename
 	vehicleId := driver.VehicleId
 
-	stmt, err := db.Prepare("update `Driver` set name = ?, prename = ?, vehicleId = ? where id = ?")
+	stmt, err := db.Prepare("update `driver` set name = ?, prename = ?, vehicle_id = ? where id = ?")
 	if err != nil {
 		panic(err.Error())
 	}
-	_, err = stmt.Exec(driverId, name, prename, vehicleId)
+	_, err = stmt.Exec(name, prename, vehicleId, driverId)
 	if err != nil {
 		panic(err.Error())
 	}

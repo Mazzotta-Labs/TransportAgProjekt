@@ -5,7 +5,7 @@ type Driver struct {
 	DriverId  int
 	Name      string
 	Prename   string
-	VehicleId string
+	VehicleId int
 	Brand     string
 	Number    string
 }
