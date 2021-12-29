@@ -222,14 +222,14 @@ func createCustomer(response string, isCreate bool) *entity.Customer {
 		}
 	}
 	return &entity.Customer{
-		CustomerId:      toInt(customerInfos[0]),
-		CustomerName:    customerInfos[1],
-		CustomerPrename: customerInfos[2],
-		TelNr:           customerInfos[3],
-		Street:          customerInfos[4],
-		Plz:             customerInfos[5],
-		Town:            customerInfos[6],
-		Country:         customerInfos[7],
+		CustomerId:      0,
+		CustomerName:    customerInfos[0],
+		CustomerPrename: customerInfos[1],
+		TelNr:           customerInfos[2],
+		Street:          customerInfos[3],
+		Plz:             customerInfos[4],
+		Town:            customerInfos[5],
+		Country:         customerInfos[6],
 	}
 }
 
