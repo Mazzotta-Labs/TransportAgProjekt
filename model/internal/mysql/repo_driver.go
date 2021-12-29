@@ -4,7 +4,7 @@ import "TransportAgProjekt/model/entity"
 
 func (r *MySqlRepository) FindAllDriver() []entity.Driver {
 	var drivers []entity.Driver
-	result, err := db.Query("select * from driver d join vehicle v using (id)")
+	result, err := db.Query("select d.id, d.name, d.prename, v.id, v.brand, v.number from driver d left join vehicle v on v.id = d.vehicle_id")
 	if err != nil {
 		panic(err.Error())
 	}
