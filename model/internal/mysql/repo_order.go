@@ -27,8 +27,6 @@ func (r *MySqlRepository) AddOrder(order entity.Order) {
 	customerId := order.CustomerId
 	driverId := order.DriverId
 	orderDate := order.OrderDate
-	// orderId := order.OrderId
-	// productId := order.ProductsId
 
 	stmt, err := db.Prepare("insert into `Order` (`order_date`,`customer_id`,`driver_id`) values (?,?,?)")
 	if err != nil {
