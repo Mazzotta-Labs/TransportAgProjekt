@@ -70,8 +70,6 @@ func DeleteProduct(productId string) {
 	internal.R.DeleteProduct(productId)
 }
 
-// Vehicles
-
 func FindAllVehicles() []entity.Vehicle {
 	return internal.R.FindAllVehicle()
 }
@@ -84,51 +82,9 @@ func UpdateVehicles(vehicle entity.Vehicle) {
 	internal.R.UpdateVehicle(vehicle)
 }
 
-func DeleteVehicles(vehicle entity.Vehicle) {
-	internal.R.DeleteVehicle(vehicle)
+func DeleteVehicles(vehicleId string) {
+	internal.R.DeleteVehicle(vehicleId)
 }
-
-/*
-func AddBook(book entity.Book) {
-	internal.R.AddBook(book)
-}
-
-func CheckBookAvailability(isbn string) bool {
-
-	for _, book := range internal.R.FindAll() {
-		if book.ISBN == isbn && !book.Borrowed {
-			return true
-		}
-	}
-	return false
-}
-
-func LendBook(isbn string) *entity.Book {
-	for _, book := range internal.R.FindAll() {
-		if book.ISBN == isbn && !book.Borrowed {
-			book.Borrowed = true
-			internal.R.UpdateBook(book)
-			return &book
-		}
-	}
-	return nil
-}
-
-func ReturnBook(isbn string) *entity.Book {
-	for _, book := range internal.R.FindAll() {
-		if book.ISBN == isbn && book.Borrowed {
-			book.Borrowed = false
-			internal.R.UpdateBook(book)
-			return &book
-		}
-	}
-	return nil
-}
-
-func FindAllBooks() []entity.Book {
-	return internal.R.FindAll()
-}
-*/
 
 // Model
 func ShutDown() {

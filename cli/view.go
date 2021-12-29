@@ -114,7 +114,7 @@ func PrintAddCustomer() {
 	fmt.Println(`
 #********* Kunde erstellen ***********
 # gib folgendes ein:
-# "ID", "Name", "Vorname", "Telefon Nr.", "Strasse", "PLZ", "Ort", "Land" 
+# "Name", "Vorname", "Telefon Nr.", "Strasse", "PLZ", "Ort", "Land" 
 `)
 }
 
@@ -183,6 +183,30 @@ func PrintVehicleMenu() {
 # q. Zurück
 #
 ##************* Fahrzeuge *************
+`)
+}
+
+func PrintAddVehicle() {
+	fmt.Println(`
+#********* Fahrzeug erstellen ***********
+# gib folgendes ein:
+# "Marke", "Nummer"
+`)
+}
+
+func PrintUpdateVehicle() {
+	fmt.Println(`
+#********* Fahrzeug bearbeiten ***********
+# gib folgendes ein wobei "ID" von
+# einem bestehenden Fahrzeug sein muss:
+# "ID", "Marke", "Nummer"
+`)
+}
+
+func PrintDeleteVehicle() {
+	fmt.Println(`
+#********* Fahrzeug löschen ***********
+# gib die ID des zu löschenden Fahrzeug ein:
 `)
 }
 

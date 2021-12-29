@@ -103,13 +103,13 @@ func parseCommand(input string) {
 			case command == "1":
 				PrintAddCustomer()
 				command := askForCommand()
-				customer := createCustomer(command)
+				customer := createCustomer(command, true)
 				model.AddCustomer(*customer)
 				break
 			case command == "2":
 				PrintUpdateCustomer()
 				command := askForCommand()
-				customer := createCustomer(command)
+				customer := createCustomer(command, false)
 				model.UpdateCustomer(*customer)
 				break
 			case command == "3":
@@ -165,27 +165,28 @@ func parseCommand(input string) {
 	case input == "5":
 		ClearTerminal()
 		PrintVehicleMenu()
-		vehicles := model.FindAllProduct()
-		printProductList(vehicles)
+		vehicles := model.FindAllVehicles()
+		printVehicleList(vehicles)
 	out5:
 		for true {
-			ClearTerminal()
-			PrintVehicleMenu()
-			vehicles := model.FindAllVehicles()
-			printVehicleList(vehicles)
 			command := askForCommand()
 			switch {
 			case command == "1":
-				PrintAddOrder()
+				PrintAddVehicle()
 				command := askForCommand()
-				order := createVehicle(command)
-				model.AddVehicles(*order)
+				vehicle := createVehicle(command, true)
+				model.AddVehicles(*vehicle)
 				break
 			case command == "2":
-				//TODO
+				PrintUpdateVehicle()
+				command := askForCommand()
+				vehicle := createVehicle(command, false)
+				model.UpdateVehicles(*vehicle)
 				break
 			case command == "3":
-				//TODO
+				PrintDeleteVehicle()
+				command := askForCommand()
+				model.DeleteVehicles(command)
 				break
 			case command == "q":
 				break out5
@@ -207,22 +208,19 @@ func parseCommand(input string) {
 	}
 }
 
-/*
-func createBook(response string) *entity.Book {
-	bookInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
-	return &entity.Book{
-		ISBN:          bookInfos[0],
-		Title:         bookInfos[1],
-		Author:        bookInfos[2],
-		PublishedYear: toInt(bookInfos[3]),
-		Borrowed:      false,
-	}
-}
-
-*/
-
-func createCustomer(response string) *entity.Customer {
+func createCustomer(response string, isCreate bool) *entity.Customer {
 	customerInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+	if isCreate {
+		return &entity.Customer{
+			CustomerName:    customerInfos[0],
+			CustomerPrename: customerInfos[1],
+			TelNr:           customerInfos[2],
+			Street:          customerInfos[3],
+			Plz:             customerInfos[4],
+			Town:            customerInfos[5],
+			Country:         customerInfos[6],
+		}
+	}
 	return &entity.Customer{
 		CustomerId:      toInt(customerInfos[0]),
 		CustomerName:    customerInfos[1],
@@ -235,8 +233,14 @@ func createCustomer(response string) *entity.Customer {
 	}
 }
 
-func createVehicle(response string) *entity.Vehicle {
+func createVehicle(response string, isCreate bool) *entity.Vehicle {
 	customerInfos := strings.Split(strings.ReplaceAll(response, ", ", ","), ",")
+	if isCreate {
+		return &entity.Vehicle{
+			Brand:  customerInfos[0],
+			Number: customerInfos[1],
+		}
+	}
 	return &entity.Vehicle{
 		VehicleId: toInt(customerInfos[0]),
 		Brand:     customerInfos[1],

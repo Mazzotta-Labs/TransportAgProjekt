@@ -24,16 +24,14 @@ func (r *MySqlRepository) FindAllVehicle() []entity.Vehicle {
 }
 
 func (r *MySqlRepository) AddVehicle(vehicle entity.Vehicle) {
-	vehicleId := vehicle.VehicleId
 	brand := vehicle.Brand
-	//driverId := vehicle.DriverId
 	number := vehicle.Number
 
-	stmt, err := db.Prepare("insert into vehicle values (?,?,?)")
+	stmt, err := db.Prepare("insert into vehicle values (?,?)")
 	if err != nil {
 		panic(err.Error())
 	}
-	_, err = stmt.Exec(vehicleId, brand, number)
+	_, err = stmt.Exec(brand, number)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -41,9 +39,27 @@ func (r *MySqlRepository) AddVehicle(vehicle entity.Vehicle) {
 }
 
 func (r *MySqlRepository) UpdateVehicle(vehicle entity.Vehicle) {
-	//TODO
+	brand := vehicle.Brand
+	number := vehicle.Number
+	vehicleId := vehicle.VehicleId
+
+	stmt, err := db.Prepare("update `vehicle` set brand = ?, number = ? where id = ?")
+	if err != nil {
+		panic(err.Error())
+	}
+	_, err = stmt.Exec(brand, number, vehicleId, vehicleId)
+	if err != nil {
+		panic(err.Error())
+	}
 }
 
-func (r *MySqlRepository) DeleteVehicle(vehicle entity.Vehicle) {
-	//TODO
+func (r *MySqlRepository) DeleteVehicle(vehicleId string) {
+	stmt, err := db.Prepare("delete from vehicle where id = ?")
+	if err != nil {
+		panic(err.Error())
+	}
+	_, err = stmt.Exec(vehicleId)
+	if err != nil {
+		panic(err.Error())
+	}
 }
