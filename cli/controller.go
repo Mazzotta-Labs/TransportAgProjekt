@@ -16,18 +16,19 @@ import (
 func parseCommand(input string) {
 	switch {
 	case input == "1":
-		ClearTerminal()
-		PrintOrderMenu()
-		orders := model.FindAllOrder()
-		printOrderList(orders)
 	out1:
 		for true {
+			ClearTerminal()
+			PrintOrderMenu()
+			orders := model.FindAllOrder()
+			printOrderList(orders)
 			command := askForCommand()
 			switch {
 			case command == "1":
 				PrintAddOrder()
 				command := askForCommand()
 				order := createOrder(command, true)
+				println(&order)
 				model.AddOrder(*order)
 				break
 			case command == "2":
@@ -51,12 +52,12 @@ func parseCommand(input string) {
 		PrintMenue()
 		break
 	case input == "2":
-		ClearTerminal()
-		PrintDriverMenu()
-		drivers := model.FindAllDriver()
-		printDriverList(drivers)
 	out2:
 		for true {
+			ClearTerminal()
+			PrintDriverMenu()
+			drivers := model.FindAllDriver()
+			printDriverList(drivers)
 			command := askForCommand()
 			switch {
 			case command == "1":
@@ -126,12 +127,12 @@ func parseCommand(input string) {
 		PrintMenue()
 		break
 	case input == "4":
-		ClearTerminal()
-		PrintProductMenu()
-		products := model.FindAllProduct()
-		printProductList(products)
 	out4:
 		for true {
+			ClearTerminal()
+			PrintProductMenu()
+			products := model.FindAllProduct()
+			printProductList(products)
 			command := askForCommand()
 			switch {
 			case command == "1":
@@ -273,6 +274,18 @@ func createOrder(response string, isCreate bool) *entity.Order {
 
 	intCustomerVar, err := strconv.Atoi(orderInfos[2-indexRange])
 	intDriverVar, err := strconv.Atoi(orderInfos[3-indexRange])
+	var intProductsVar []int
+	for i := range orderInfos {
+		if i > 2 {
+			product, err := strconv.Atoi(orderInfos[i])
+			intProductsVar = append(intProductsVar, product)
+			if err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+		}
+	}
+
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -283,6 +296,7 @@ func createOrder(response string, isCreate bool) *entity.Order {
 			OrderDate:  orderInfos[0],
 			CustomerId: intCustomerVar,
 			DriverId:   intDriverVar,
+			ProductsId: intProductsVar,
 		}
 	}
 
@@ -354,7 +368,8 @@ func printOrderList(ordersToPrint []entity.Order) {
 		fmt.Println(i+1, "| Order ID:", toStr(order.OrderId)+",",
 			"Datum:", date.Format("2006-01-02")+",",
 			"Kunden Id:", strconv.Itoa(order.CustomerId)+",",
-			"Fahrer Id:", strconv.Itoa(order.DriverId))
+			"Fahrer Id:", strconv.Itoa(order.DriverId)+",",
+			"Produkt Id:", strconv.Itoa(order.ProductId))
 	}
 }
 

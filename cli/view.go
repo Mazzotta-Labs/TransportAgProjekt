@@ -36,7 +36,7 @@ func PrintAddOrder() {
 	fmt.Println(`
 #********* Auftrag erstellen ***********
 # gib folgendes ein:
-# "Datum", "Kunden Id", "Fahrer Id"
+# "Datum", "Kunden Id", "Fahrer Id", "Produkt1 Id", "Produkt2 Id", ...
 `)
 }
 

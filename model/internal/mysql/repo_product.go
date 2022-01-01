@@ -13,7 +13,6 @@ func (r *MySqlRepository) FindAllProduct() []entity.Product {
 
 	for result.Next() {
 		var Product entity.Product
-
 		err := result.Scan(&Product.ProductId, &Product.Description, &Product.Name, &Product.CategoryId)
 		if err != nil {
 			panic(err.Error())
