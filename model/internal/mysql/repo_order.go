@@ -16,7 +16,8 @@ func (r *MySqlRepository) FindAllOrder() []entity.Order {
 
 		err := result.Scan(&order.OrderId, &order.OrderDate, &order.CustomerName, &order.CustomerPrename, &order.Street, &order.Plz, &order.Town, &order.Country, &order.Name, &order.Prename, &order.Number)
 		if err != nil {
-			panic(err.Error())
+			println(err)
+			//panic(err.Error())
 		}
 		orders = append(orders, order)
 	}

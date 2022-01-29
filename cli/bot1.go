@@ -4,14 +4,14 @@ import (
 	"TransportAgProjekt/model"
 	"TransportAgProjekt/model/entity"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-	"log"
 	"strconv"
 )
 
 func BotMessage() {
 	bot, err := tgbotapi.NewBotAPI("5010157425:AAHCefPFUxTbLgrDr43GiqlJoBAUnoH4E8o")
 	if err != nil {
-		log.Panic(err)
+		println(err)
+		//log.Panic(err)
 	}
 
 	bot.Debug = true
