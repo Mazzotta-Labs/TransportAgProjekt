@@ -7,5 +7,5 @@ import (
 
 func main() {
 	cli.BotMessage()
-	time.Sleep(1000)
+	time.Sleep(10 * time.Second)
 }

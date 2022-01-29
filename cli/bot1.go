@@ -19,7 +19,7 @@ func BotMessage() {
 	result := model.FindAllOrder()
 	printBotOrderList(result)
 	txt := printBotOrderList(model.FindAllOrder())
-
+	println(txt)
 	msg := tgbotapi.NewMessage(-712071829, txt)
 
 	bot.Send(msg)
