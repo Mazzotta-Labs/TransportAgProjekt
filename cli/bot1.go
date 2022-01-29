@@ -5,12 +5,14 @@ import (
 	"TransportAgProjekt/model/entity"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"strconv"
+	"time"
 )
 
 func BotMessage() {
 	bot, err := tgbotapi.NewBotAPI("5010157425:AAHCefPFUxTbLgrDr43GiqlJoBAUnoH4E8o")
 	if err != nil {
 		println(err)
+		time.Sleep(10 * time.Second)
 		//log.Panic(err)
 	}
 
@@ -20,6 +22,7 @@ func BotMessage() {
 	printBotOrderList(result)
 	txt := printBotOrderList(model.FindAllOrder())
 	println(txt)
+	time.Sleep(10 * time.Second)
 	msg := tgbotapi.NewMessage(-712071829, txt)
 
 	bot.Send(msg)

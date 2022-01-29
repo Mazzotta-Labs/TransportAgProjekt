@@ -2,6 +2,7 @@ package mysql
 
 import (
 	"TransportAgProjekt/model/entity"
+	"time"
 )
 
 func (r *MySqlRepository) FindAllOrder() []entity.Order {
@@ -17,6 +18,7 @@ func (r *MySqlRepository) FindAllOrder() []entity.Order {
 		err := result.Scan(&order.OrderId, &order.OrderDate, &order.CustomerName, &order.CustomerPrename, &order.Street, &order.Plz, &order.Town, &order.Country, &order.Name, &order.Prename, &order.Number)
 		if err != nil {
 			println(err)
+			time.Sleep(10 * time.Second)
 			//panic(err.Error())
 		}
 		orders = append(orders, order)
