@@ -20,7 +20,7 @@ func NewMySqlRepository() *MySqlRepository {
 }
 
 func openDatabase() *sql.DB {
-	db, err := sql.Open("mysql", "root:password@tcp(STUDENT-DND-DB:3306)/transportag")
+	db, err := sql.Open("mysql", "root:password@tcp(192.168.1.12:3306)/transportag")
 	if err != nil {
 		panic(err.Error())
 	}
