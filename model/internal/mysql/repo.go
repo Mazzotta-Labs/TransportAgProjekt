@@ -2,13 +2,7 @@ package mysql
 
 import (
 	"TransportAgProjekt/model/entity"
-	"bufio"
 	"database/sql"
-	"fmt"
-	"log"
-	"os"
-	"strings"
-
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -26,23 +20,9 @@ func NewMySqlRepository() *MySqlRepository {
 }
 
 func openDatabase() *sql.DB {
-	fmt.Println("Bitte MySQL ConnectionString eingeben (Format: root:root@tcp(localhost:3306)/transportag)")
-
-	command := askForCommand()
-
-	db, err := sql.Open("mysql", command)
+	db, err := sql.Open("mysql", "student-dnd-db:7nS$!!8T@tcp(localhost:3306)/transportag")
 	if err != nil {
 		panic(err.Error())
 	}
 	return db
-}
-
-func askForCommand() string {
-	reader := bufio.NewReader(os.Stdin)
-	response, err := reader.ReadString('\n')
-	if err != nil {
-		log.Fatal(err)
-	}
-	response = strings.TrimSpace(response)
-	return response
 }
