@@ -19,12 +19,9 @@ func (r *MySqlRepository) FindAllOrder() []entity.Order {
 
 		err := result.Scan(&order.OrderId, &order.OrderDate, &order.CustomerName, &order.CustomerPrename, &order.Street, &order.Plz, &order.Town, &order.Country, &order.Name, &order.Prename, &order.Number)
 		if err != nil {
-			println("db conection error")
-			time.Sleep(10 * time.Second)
 			panic(err.Error())
 		}
 		orders = append(orders, order)
 	}
-	println("DB connected")
 	return orders
 }
